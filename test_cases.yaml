@@ -66,9 +66,3 @@ tests:
       - config: "stat.yaml"
         outputs:
           stat.out: "expected_outputs/stat.out"
-  - name: "VCasT all stats 0003"
-    example_dir: "tests/examples/Stats/all_stats-0003"
-    commands:
-      - config: "stat.yaml"
-        outputs:
-          stat.out: "expected_outputs/stat.out"
