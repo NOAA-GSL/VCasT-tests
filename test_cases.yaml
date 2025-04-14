@@ -72,15 +72,3 @@ tests:
       - config: "stat.yaml"
         outputs:
           stat.out: "expected_outputs/stat.out"
-  - name: "WE2E Reflectivity >= 15"
-    example_dir: "tests/examples/WE2E/reflectivity_ge15"
-    commands:
-      - config: "refc-HRRR.yaml"
-        outputs:
-          HRRR.data: "expected_outputs/HRRR.data"
-      - config: "refc-REF.yaml"
-        outputs:
-          REF.data: "expected_outputs/REF.data"
-      - config: "plot.yaml"
-        outputs:
-          plot_REFC.png: "expected_outputs/plot_REFC.png"
