@@ -14,9 +14,11 @@ git clone https://github.com/NOAA-GSL/VCasT-tests.git
 ```
 
 2. Install or Link VCasT
+
 Ensure that VCasT is installed or accessible in your environment. This repository's examples assume you have a working VCasT setup.
 
 3. Explore the Examples
+
 - Look inside examples/ for small demos illustrating how to configure and run VCasT.
 - Use the datasets in this repository to run tests locally or within a CI environment.
 
