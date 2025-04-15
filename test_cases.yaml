@@ -66,3 +66,21 @@ tests:
       - config: "stat.yaml"
         outputs:
           stat.out: "expected_outputs/stat.out"
+  - name: "VCasT all stats 0003"
+    example_dir: "tests/examples/Stats/all_stats-0003"
+    commands:
+      - config: "stat.yaml"
+        outputs:
+          stat.out: "expected_outputs/stat.out"
+  - name: "WE2E Reflectivity >= 15"
+    example_dir: "tests/examples/WE2E/reflectivity_ge15"
+    commands:
+      - config: "refc-HRRR.yaml"
+        outputs:
+          HRRR.data: "expected_outputs/HRRR.data"
+      - config: "refc-REF.yaml"
+        outputs:
+          REF.data: "expected_outputs/REF.data"
+      - config: "plot.yaml"
+        outputs:
+          plot_REFC.png: "expected_outputs/plot_REFC.png"
