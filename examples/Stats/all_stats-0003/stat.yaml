@@ -33,14 +33,14 @@ stat_name:
   - "bias"
   - "quantiles"
   - "mae"
-  - "gss"
-  - "fbias"
-  - "pod"
-  - "far"
-  - "csi"
+  - "gss:290:290:2"
+  - "fbias:290:290:2"
+  - "pod:290:290:2"
+  - "far:290:290:2"
+  - "csi:290:290:2"
   - "corr"
   - "stdev"
-  - "sr"
+  - "sr:290:290:2"
 
 threshold:
 
