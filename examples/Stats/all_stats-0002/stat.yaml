@@ -33,21 +33,15 @@ stat_name:
   - "bias"
   - "quantiles"
   - "mae"
-  - "gss"
-  - "fbias"
-  - "pod"
-  - "far"
-  - "csi"
+  - "gss:290:290:2"
+  - "fbias:290:290:2"
+  - "pod:290:290:2"
+  - "far:290:290:2"
+  - "csi:290:290:2"
   - "corr"
-  - "stdev"
-  - "sr"
+  - "stdev:290:290:2"
+  - "sr:290:290:2"
 
-
-threshold:
-
-# Variable Threshold and Radius
-var_threshold: 290                  # Threshold value for analysis
-var_radius: 2                        # Influence radius for calculations (grid points)
 
 # Grid and Interpolation Settings
 interpolation: true               # Whether to interpolate data
