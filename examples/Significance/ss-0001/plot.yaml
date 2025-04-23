@@ -1,0 +1,42 @@
+start_date: "2024-04-29_12:00:00"  # Start date of the data processing
+end_date: "2024-05-31_12:00:00"
+interval_hours: "1"                # Interval for processing (e.g., hourly, 6-hourly)
+
+plot_type: line
+
+vars:
+    - observed_diff: "./diff_agg.data"
+
+# General plot parameters
+plot_title: "Temperature at 2m (RMSE difference)"
+legend_title: ""
+labels:
+  - "Model B - Model A"
+
+line_color:
+  - "green"
+
+line_marker:
+  - "o"
+
+line_type:
+  - "-."
+
+line_width:
+  - 2
+
+output_filename: RMSE_diff.png
+
+# Line plot variables
+x_label: "Lead Time"
+y_label: "RMSE difference (K)"
+ylim: [-0.5, 0.5]
+xlim: [0,36]       # Adjust as needed for your dataset
+grid: true
+yticks:   # Customize tick marks if needed
+xticks: [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30 , 33, 36]       # Customize tick marks if needed
+hlines: [0]
+
+ci: true
+significance: true
+
