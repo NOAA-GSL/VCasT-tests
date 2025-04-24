@@ -7,19 +7,16 @@ start_lead_time: 1
 end_lead_time: 1
 interval_lead_time: 1
 
+var: "T2M"
+
 # Forecast Configuration
 fcst_file_template: "../input_files/HRRR/hrrr.{year}{month}{day}{hour}.wrfprsf{lead_time}.T2M.grib2"  # Reference file template
-fcst_var: "2t"                    # Forecast variable name
-fcst_level: 2
-fcst_type_of_level: "heightAboveGround"
-shift: 0                          # Time shift (if any)
+fcst_model: "HRRR"                    # Forecast variable name
 
 
 # Reference Configuration
 ref_file_template: "../input_files/HRRR/hrrr.{valid_year}{valid_month}{valid_day}{valid_hour}.wrfprsf00.T2M.grib2"
-ref_var: "2t"  
-ref_level: 2
-ref_type_of_level: "heightAboveGround" #"heightAboveGround"
+ref_model: "HRRR"  
                
 
 # Output Configuration
