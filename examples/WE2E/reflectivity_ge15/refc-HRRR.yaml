@@ -7,19 +7,15 @@ start_lead_time: 1
 end_lead_time: 1
 interval_lead_time: 1
 
+var: "REFC"
+
 # Forecast Configuration
 fcst_file_template: "../input_files/HRRR/{year}{month}{day}/hrrr.t{hour}z.wrfprsf{lead_time}_refc.grib2"
-fcst_var: "refc"                # Forecast variable name
-fcst_level: 0
-fcst_type_of_level: "atmosphere"
-shift: 0                          # Time shift (if any)
-
+fcst_model: "HRRR"                # Forecast variable name
 
 # Reference Configuration
 ref_file_template: "../input_files/HRRR/{valid_year}{valid_month}{valid_day}/hrrr.t{valid_hour}z.wrfprsf00_refc.grib2"
-ref_var: "refc" 
-ref_level: 0
-ref_type_of_level: "atmosphere" #"heightAboveGround"
+ref_model: "HRRR" 
                
 
 # Output Configuration
