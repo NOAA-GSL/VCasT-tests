@@ -42,13 +42,13 @@ def test_significance_output_structure_and_validation(sample_config):
     assert not df.empty
     required_cols = {
         "fcst_lead", "observed_diff", "p_value",
-        "ci_lower", "ci_upper", "better_model", "significant"
+        "ci_bcl", "ci_bcu", "better_model", "significant"
     }
     assert required_cols.issubset(df.columns)
 
     for _, row in df.iterrows():
         assert 0 <= row["p_value"] <= 1
-        assert row["ci_lower"] <= row["observed_diff"] <= row["ci_upper"]
+        assert row["ci_bcl"] <= row["observed_diff"] <= row["ci_bcu"]
         assert row["better_model"] in ["Model A", "Model B"]
         if row["significant"]:
             assert row["p_value"] < 0.05
