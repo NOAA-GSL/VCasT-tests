@@ -7,7 +7,7 @@ start_lead_time: 1
 end_lead_time: 1
 interval_lead_time: 1
 
-var: "REFC"
+vars: "REFC"
 
 # Forecast Configuration
 fcst_file_template: "../input_files/HRRR/{year}{month}{day}/hrrr.t{hour}z.wrfprsf{lead_time}_refc.grib2"
