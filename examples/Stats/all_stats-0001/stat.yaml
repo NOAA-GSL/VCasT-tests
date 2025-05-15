@@ -43,5 +43,6 @@ stat_name:
 interpolation: false               # Whether to interpolate data
 target_grid: "../input_files/REF/ref_2024040102_f001.nc"   # Target grid specification
 
+vtable: "../input_files/lookup_table-v2.txt" 
 # Parallel Processing
 processes: 1                     # Number of processes to run in parallel
