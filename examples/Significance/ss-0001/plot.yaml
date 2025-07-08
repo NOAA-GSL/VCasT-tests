@@ -37,6 +37,6 @@ yticks:   # Customize tick marks if needed
 xticks: [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30 , 33, 36]       # Customize tick marks if needed
 hlines: [0]
 
-ci: true
+ci: ['observed_diff']
 significance: true
 
