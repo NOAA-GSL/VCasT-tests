@@ -23,23 +23,49 @@ def get_file_diff(expected_path, output_path):
     except Exception as e:
         return f"Could not compute diff: {e}"
 
-def compare_png_images(path1, path2):
-    """Compare two PNG images using pixel-wise difference."""
+def compare_png_images(path1, path2, pixel_tolerance=12, max_mismatch_fraction=0.01,
+                        max_size_drift=15):
+    """Compare two PNG images allowing for minor rendering differences.
+
+    matplotlib plots are re-rendered from scratch by each environment that
+    runs the tests, and small differences in matplotlib/freetype/font
+    versions shift anti-aliasing and (via bbox_inches='tight') even the
+    final canvas size by a few pixels, with no actual change in plot
+    content. Exact pixel/size equality is too strict to survive that kind
+    of environment drift, so this allows:
+      - up to `max_size_drift` pixels of difference in either dimension
+        (larger differences likely mean real content changed, so those
+        still fail outright, compared over the shared top-left region);
+      - per-channel color differences up to `pixel_tolerance` (absorbs
+        anti-aliasing noise);
+      - up to `max_mismatch_fraction` of pixels still differing beyond
+        that tolerance (catches remaining minor rendering noise while
+        still failing on genuine content differences, which touch a much
+        larger fraction of the image).
+    """
     try:
         img1 = Image.open(path1).convert("RGB")
         img2 = Image.open(path2).convert("RGB")
 
         if img1.size != img2.size:
-            return False, f"Image dimensions differ: {img1.size} vs {img2.size}"
+            size_diff = max(abs(img1.width - img2.width), abs(img1.height - img2.height))
+            if size_diff > max_size_drift:
+                return False, f"Image dimensions differ: {img1.size} vs {img2.size}"
+            w, h = min(img1.width, img2.width), min(img1.height, img2.height)
+            img1 = img1.crop((0, 0, w, h))
+            img2 = img2.crop((0, 0, w, h))
 
-        arr1 = np.array(img1)
-        arr2 = np.array(img2)
+        arr1 = np.asarray(img1, dtype=np.int16)
+        arr2 = np.asarray(img2, dtype=np.int16)
 
-        equal = np.array_equal(arr1, arr2)
-        if not equal:
-            diff = np.abs(arr1 - arr2)
-            mismatch = np.count_nonzero(diff)
-            return False, f"Images differ in {mismatch} pixels"
+        diff = np.abs(arr1 - arr2)
+        mismatched_pixels = int(np.count_nonzero(np.any(diff > pixel_tolerance, axis=-1)))
+        total_pixels = arr1.shape[0] * arr1.shape[1]
+        mismatch_fraction = mismatched_pixels / total_pixels
+
+        if mismatch_fraction > max_mismatch_fraction:
+            return False, (f"Images differ in {mismatched_pixels}/{total_pixels} pixels "
+                            f"({mismatch_fraction:.2%}, tolerance {max_mismatch_fraction:.2%})")
         return True, ""
     except Exception as e:
         return False, f"Error comparing PNGs: {e}"
