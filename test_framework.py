@@ -100,6 +100,7 @@ def run_test_case(test_case):
 
 _test_cases_path = os.path.join(os.path.dirname(__file__), "test_cases.yaml")
 
+@pytest.mark.integration
 @pytest.mark.parametrize("test_case", yaml.safe_load(open(_test_cases_path))["tests"])
 def test_dynamic_cases(test_case):
     run_test_case(test_case)
