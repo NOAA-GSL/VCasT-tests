@@ -18,6 +18,16 @@ tests:
       - config: "plot.yaml"
         outputs:
           stat_agg_reliability.png: "expected_outputs/stat_agg_reliability.png"
+  - name: "MET ROC Diagram"
+    example_dir: "examples/MET/roc"
+    commands:
+      - config: "pct.yaml"
+        outputs:
+          vars.data: "expected_outputs/vars.data"
+          agg.data: "expected_outputs/agg.data"
+      - config: "plot.yaml"
+        outputs:
+          stat_agg_roc.png: "expected_outputs/stat_agg_roc.png"
   - name: "MET Spread-Skill Scores"
     example_dir: "examples/MET/spread-skill"
     commands:

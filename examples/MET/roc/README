@@ -1,0 +1,38 @@
+# ROC Diagram Example
+
+This example demonstrates how to aggregate data from MET stat files and generate a ROC
+(Relative Operating Characteristic) diagram using VCasT. It uses the exact same input
+PCT stat data as the `MET Reliability` example -- a ROC diagram is derived from the same
+per-bin obs-yes/obs-no counts (`oy_i`/`on_i`) as a reliability diagram, just plotted as
+PODY vs. POFD instead of observed relative frequency vs. forecast probability. The
+process is divided into two main steps:
+
+## Data Aggregation:
+This step processes the MET stat files and aggregates the data into output files. One of
+these files contains the aggregated statistics needed to create the plot.
+
+## Plot Generation:
+This step uses the aggregated output file to create a ROC diagram that visually compares
+probability of detection (PODY) against probability of false detection (POFD), sweeping
+the forecast-probability threshold from 1 down to 0. Each curve's legend label includes
+its area under the curve (AUC).
+
+## Commands
+
+1. Aggregate Data
+Run the following command to process the MET stat files. This command will generate two
+output files, including one with aggregated data for further analysis.
+
+```bash
+# Aggregates MET stat files and creates output files with aggregated data
+vcast pct.yaml
+```
+
+2. Generate the ROC Diagram
+Once the data aggregation is complete, run the following command to generate the ROC
+diagram using the aggregated data:
+
+```bash
+# Generates the ROC diagram using the aggregated output file
+vcast plot.yaml
+```
