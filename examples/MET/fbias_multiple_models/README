@@ -1,0 +1,34 @@
+# FBIAS - Multiple Models Example
+
+This example demonstrates how to aggregate CTS (contingency table statistics) data from
+MET stat files for several ensemble members at once and plot frequency bias (FBIAS) for
+each of them on the same chart using VCasT. It compares 10 members of the
+`RRFS_GDAS_GF.SPP.SPPT` ensemble for 3-hr accumulated precipitation (APCP_03, >0.0 mm)
+across lead time.
+
+## Data Aggregation:
+This step processes the MET CTS stat files for all 10 members and aggregates FBIAS into a
+single output file, grouped by model/fcst_var/fcst_lead.
+
+## Plot Generation:
+This step uses the aggregated output file to plot one FBIAS line per model (the `unique`
+list in `plot.yaml` splits the aggregated data by `model`).
+
+## Commands
+
+1. Aggregate Data
+Run the following command to process the MET stat files. This produces `APCP_agg.data`.
+
+```bash
+# Aggregates MET CTS stat files for all models and creates the aggregated data file
+vcast cts.yaml
+```
+
+2. Generate the FBIAS Plot
+Once the data aggregation is complete, run the following command to generate the plot
+using the aggregated data:
+
+```bash
+# Generates the multi-model FBIAS plot using the aggregated output file
+vcast plot.yaml
+```

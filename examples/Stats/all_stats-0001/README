@@ -1,0 +1,14 @@
+# VCasT All Stats 0001
+
+This example runs VCasT's `stats` mode directly on gridded GRIB2 files: it compares a
+1-hr HRRR 2m temperature (T2M) forecast against a HRRR analysis (both GRIB2, no
+interpolation) and computes a broad set of statistics in a single run -- RMSE, bias,
+quantiles, MAE, correlation, standard deviation, and several threshold-based scores
+(GSS, FBIAS, POD, FAR, CSI at a 290K threshold with a 2-gridpoint radius of influence).
+
+## Command
+
+```bash
+# Computes all configured stats and writes them to stat.out
+vcast stat.yaml
+```

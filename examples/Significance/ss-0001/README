@@ -1,0 +1,34 @@
+# Statistical Significance Example (Comparison)
+
+This example demonstrates VCasT's `significance` mode: comparing two already-processed
+per-member data files (Model A vs. Model B 2m temperature RMSE) and plotting the
+difference with a confidence interval, to check whether the difference between the models
+is statistically significant at each lead time.
+
+## Comparison:
+This step compares `input_files/modela-T2M.data` and `input_files/modelb-T2M.data` on the
+`rmse` metric and writes the per-lead-time difference to an output file.
+
+## Plot Generation:
+This step plots the RMSE difference (Model B - Model A) vs. lead time, with a confidence
+interval band (`ci`) and significance shading (`significance: true`) so you can see where
+the difference is significant.
+
+## Commands
+
+1. Compare Models
+Run the following command to compute the RMSE difference between Model A and Model B:
+
+```bash
+# Compares modela-T2M.data and modelb-T2M.data on rmse -> diff_agg.data
+vcast config_comp.yaml
+```
+
+2. Generate the Plot
+Once the comparison is complete, run the following command to plot the difference with
+its confidence interval:
+
+```bash
+# Generates the RMSE difference plot using diff_agg.data
+vcast plot.yaml
+```

@@ -1,0 +1,34 @@
+# Ensemble Spread-Skill Example
+
+This example demonstrates how to aggregate ECNT (ensemble continuous statistics) data from
+MET stat files and plot ensemble spread against RMSE using VCasT. It compares the
+`RRFS_GDAS_GF.SPP.SPPT` ensemble's 2m temperature (TMP) spread (`spread_plus_oerr`), RMSE,
+and their ratio across lead time -- a spread-skill ratio close to 1.0 indicates a
+well-calibrated ensemble.
+
+## Data Aggregation:
+This step processes the MET ECNT stat files and aggregates `spread_plus_oerr`, `rmse`, and
+`ratio` into an output file for plotting.
+
+## Plot Generation:
+This step uses the aggregated output file to plot spread, RMSE, and their ratio vs. lead time.
+
+## Commands
+
+1. Aggregate Data
+Run the following command to process the MET stat files. This produces `vars.data`
+(extracted per-record values) and `agg.data` (aggregated by model/fcst_var/fcst_lead).
+
+```bash
+# Aggregates MET ECNT stat files and creates output files with aggregated data
+vcast ecnt.yaml
+```
+
+2. Generate the Spread-Skill Plot
+Once the data aggregation is complete, run the following command to generate the plot using
+the aggregated data:
+
+```bash
+# Generates the spread-skill plot using the aggregated output file
+vcast plot.yaml
+```

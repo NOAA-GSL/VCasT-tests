@@ -1,0 +1,45 @@
+# Fractions Skill Score (FSS) Example
+
+This example demonstrates how to aggregate NBRCNT (neighborhood continuous statistics)
+data from MET stat files and compute the Fractions Skill Score (FSS) using VCasT. It uses
+`NAMnest_mem000` composite reflectivity (REFC) at four thresholds (>=20, >=30, >=40,
+>=50 dBZ) and five neighborhood sizes (`interp_pnts`: 9, 25, 81, 361, 729), grouped by
+model/fcst_var/fcst_lead/fcst_thresh/interp_pnts.
+
+## Data Aggregation:
+This step processes the MET NBRCNT stat files and aggregates FSS into an output file.
+
+## Plot Generation (optional, manual):
+`plot.yaml` plots FSS vs. lead time for the >=20 dBZ threshold, one line per neighborhood
+size. It expects one input file per neighborhood size (`agg_20_9.data`, `agg_20_25.data`,
+...), which `create_files.sh` produces by splitting `agg.data` on threshold and
+`interp_pnts`. This split step is not part of the automated test suite (only the
+aggregation step is), so it needs to be run manually before plotting.
+
+## Commands
+
+1. Aggregate Data
+Run the following command to process the MET stat files. This produces
+`filtered_output.data` (reformatted rows), `vars.data`, and `agg.data`.
+
+```bash
+# Aggregates MET NBRCNT stat files and creates the aggregated data file
+vcast NBRCNT.yaml
+```
+
+2. Split the Aggregated Data by Threshold/Neighborhood Size
+Run the helper script to split `agg.data` into the per-threshold, per-`interp_pnts` files
+that `plot.yaml` reads from:
+
+```bash
+# Creates agg_<threshold>_<interp_pnts>.data files from agg.data
+./create_files.sh
+```
+
+3. Generate the FSS Plot
+Once the split files exist, run the following command to generate the plot:
+
+```bash
+# Generates the FSS plot using the split aggregated data
+vcast plot.yaml
+```

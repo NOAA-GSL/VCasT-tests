@@ -53,3 +53,7 @@ def test_significance_output_structure_and_validation(sample_config):
         if row["significant"]:
             assert row["p_value"] < 0.05
 
+        # Model B has a lower (better) rmse than Model A at every lead time
+        # in this fixture, so it must always be reported as the better model.
+        assert row["better_model"] == "Model B"
+

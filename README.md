@@ -13,9 +13,13 @@ This repository contains a collection of test datasets and example workflows for
 git clone https://github.com/NOAA-GSL/VCasT-tests.git
 ```
 
-2. Install or Link VCasT
+2. Install VCasT (with the `dev` extra, which pulls in `pytest` and `Pillow`)
 
-Ensure that VCasT is installed or accessible in your environment. This repository's examples assume you have a working VCasT setup.
+```bash
+pip install -e "/path/to/VCasT[all,dev]"
+```
+
+The `vcast` console script must be on `PATH` and importable before running any tests here.
 
 3. Explore the Examples
 
@@ -29,7 +33,23 @@ cd VCasT-tests
 pytest -v
 ```
 
-This command runs the entire test suite, ensuring that each dataset and example is validated against the latest VCasT code.
+This runs two layers of tests:
+- Unit tests (`test_stats/`, `test_classes/`, `test_metstat/`, `test_agg/`, `test_plot/`, `test_cli/`): fast, isolated tests that call `vcast` functions/classes directly, with no subprocesses or real GRIB/NetCDF files.
+- `test_framework.py`: slower, subprocess-driven integration tests, marked `integration`, driven by `test_cases.yaml`. These invoke the `vcast` CLI end-to-end against the datasets under `examples/` and compare outputs against the fixtures under `examples/*/expected_outputs/`.
+
+During day-to-day development, run just the fast unit tests:
+
+```bash
+pytest -m "not integration"
+```
+
+Or just the integration suite (useful after touching parsing/aggregation/plotting logic, since that's what the fixtures under `examples/` exercise end-to-end):
+
+```bash
+pytest -m integration
+```
+
+This works whether the repository is checked out standalone or embedded as the `tests/` submodule of VCasT.
 
 ### License
 
