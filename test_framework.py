@@ -58,7 +58,7 @@ def check_png_is_valid_plot(path, min_width=50, min_height=50):
     return True, ""
 
 def run_test_case(test_case):
-    example_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", test_case["example_dir"]))
+    example_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), test_case["example_dir"]))
     logging.info("Running test case '%s' in '%s'", test_case["name"], example_dir)
 
     for command in test_case["commands"]:
@@ -98,7 +98,9 @@ def run_test_case(test_case):
                     diff = get_file_diff(expected_path, output_path)
                     assert False, f"Text/binary file mismatch:\n{diff}"
 
-@pytest.mark.parametrize("test_case", yaml.safe_load(open("tests/test_cases.yaml"))["tests"])
+_test_cases_path = os.path.join(os.path.dirname(__file__), "test_cases.yaml")
+
+@pytest.mark.parametrize("test_case", yaml.safe_load(open(_test_cases_path))["tests"])
 def test_dynamic_cases(test_case):
     run_test_case(test_case)
 
