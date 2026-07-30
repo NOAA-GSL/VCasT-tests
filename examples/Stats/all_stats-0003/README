@@ -1,0 +1,13 @@
+# VCasT All Stats 0003
+
+Same set of stats and interpolation settings as `all_stats-0002`, but the forecast side
+comes from a different model's NetCDF output ("resHRRR") instead of HRRR GRIB2 -- this
+exercises comparing a forecast in one file format/model against a reference (HRRR
+analysis) in another.
+
+## Command
+
+```bash
+# Computes all configured stats and writes them to stat.out
+vcast stat.yaml
+```

@@ -1,0 +1,13 @@
+# MET Examples
+
+These examples show VCasT processing [MET](https://dtcenter.org/community-code/model-evaluation-tools-met) `.stat` output files: aggregating a line type across MET stat files, then plotting the aggregated result. Each subfolder is self-contained and has its own README with the exact commands to run.
+
+- `cts_metrics/` -- aggregates CTS (contingency table statistics) values (FBIAS, PODY, FAR, CSI, GSS) for reflectivity and plots them vs. lead time.
+- `fbias_multiple_models/` -- aggregates FBIAS for 10 ensemble members and plots them together vs. lead time.
+- `fss/` -- aggregates NBRCNT (neighborhood/fractions skill score) data across thresholds and interpolation radii.
+- `performance_diagram/` -- aggregates CTS data and plots it as a performance diagram (PODY vs. 1-FAR contours).
+- `reliability/` -- aggregates PCT (probability contingency table) data and plots a reliability diagram.
+- `roc/` -- aggregates the same PCT data as `reliability/` and plots a ROC diagram instead.
+- `spread-skill/` -- aggregates ECNT (ensemble continuous statistics) data and plots ensemble spread vs. RMSE.
+
+Every subfolder follows the same two-step pattern: run a conversion/aggregation config first (`vcast <config>.yaml`), then run `vcast plot.yaml` to render the aggregated output.

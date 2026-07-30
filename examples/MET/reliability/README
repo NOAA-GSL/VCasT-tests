@@ -15,14 +15,13 @@ Run the following command to process the MET stat files. This command will gener
 
 ```bash
 # Aggregates MET stat files and creates output files with aggregated data
-vcast config_reliability.yaml
+vcast pct.yaml
 ```
 
 2. Generate the Reliability Plot
 Once the data aggregation is complete, run the following command to generate the reliability plot using the aggregated data:
 
 ```bash
-Copy
 # Generates the reliability plot using the aggregated output file
 vcast plot.yaml
 ```

@@ -1,0 +1,14 @@
+# Statistical Significance Example (Aggregation)
+
+This example demonstrates VCasT's `agg` mode on per-member significance input data: it
+aggregates Model B's per-member 2m temperature data (`input_files/modelb-T2M.data`),
+grouping by lead time and computing mean RMSE and bias across ensemble members. This is
+the kind of aggregation step that typically feeds into a `significance` comparison like
+the one in `ss-0001`.
+
+## Command
+
+```bash
+# Aggregates modelb-T2M.data by fcst_lead -> agg.data
+vcast config_agg.yaml
+```

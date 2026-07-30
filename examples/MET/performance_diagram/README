@@ -1,0 +1,34 @@
+# Performance Diagram Example
+
+This example demonstrates how to aggregate CTS (contingency table statistics) data from
+MET stat files and plot it as a performance diagram using VCasT. It uses `RRFS_mem000`
+1-hr accumulated precipitation (APCP_01, >0.0 mm) and plots probability of detection
+(PODY) against 1 - false alarm ratio (1-FAR), with background contours for frequency bias
+and critical success index (CSI).
+
+## Data Aggregation:
+This step processes the MET CTS stat files and aggregates PODY/FAR/CSI/FBIAS/GSS into an
+output file for plotting.
+
+## Plot Generation:
+This step uses the aggregated output file to draw the performance diagram.
+
+## Commands
+
+1. Aggregate Data
+Run the following command to process the MET stat files. This produces `APCP01_agg.data`,
+aggregated by model/fcst_var/fcst_lead.
+
+```bash
+# Aggregates MET CTS stat files and creates the aggregated data file
+vcast cts.yaml
+```
+
+2. Generate the Performance Diagram
+Once the data aggregation is complete, run the following command to generate the diagram
+using the aggregated data:
+
+```bash
+# Generates the performance diagram using the aggregated output file
+vcast plot.yaml
+```

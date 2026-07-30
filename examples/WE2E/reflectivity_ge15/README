@@ -1,0 +1,37 @@
+# WE2E Reflectivity >= 15 dBZ Example
+
+This example demonstrates VCasT's `stats` mode, which computes verification statistics
+directly from gridded forecast/reference files (GRIB2/NetCDF), rather than from
+pre-computed MET stat files. It computes RMSE for composite reflectivity (REFC, >=15 dBZ,
+2-gridpoint radius of influence) for two forecast sources against the same HRRR analysis:
+
+- `refc-HRRR.yaml` -- HRRR forecast vs. HRRR analysis (both GRIB2), with interpolation to
+  a common target grid.
+- `refc-REF.yaml` -- a second model's NetCDF output ("resHRRR") vs. the same HRRR
+  analysis, also interpolated to the target grid.
+
+`plot.yaml` then plots both models' RMSE on the same chart vs. lead time.
+
+Note: this example is not currently wired into `test_cases.yaml`'s automated suite; run
+it manually with the commands below.
+
+## Commands
+
+1. Compute Stats
+Run each config to compute RMSE against the HRRR analysis for both forecast sources:
+
+```bash
+# Computes RMSE for HRRR vs. HRRR analysis -> HRRR.data
+vcast refc-HRRR.yaml
+
+# Computes RMSE for the resHRRR NetCDF output vs. HRRR analysis -> REF.data
+vcast refc-REF.yaml
+```
+
+2. Generate the Plot
+Once both stats files exist, plot RMSE vs. lead time for both models:
+
+```bash
+# Generates the RMSE comparison plot using HRRR.data and REF.data
+vcast plot.yaml
+```

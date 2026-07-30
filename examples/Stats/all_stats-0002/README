@@ -1,0 +1,12 @@
+# VCasT All Stats 0002
+
+Same comparison as `all_stats-0001` (1-hr HRRR T2M forecast vs. HRRR analysis, same set
+of stats), but with `interpolation: true` -- the forecast is interpolated onto the target
+grid before the statistics are computed, instead of being compared on its native grid.
+
+## Command
+
+```bash
+# Computes all configured stats (with interpolation) and writes them to stat.out
+vcast stat.yaml
+```
